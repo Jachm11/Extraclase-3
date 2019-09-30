@@ -60,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
                 
             }
         });
+
+        //Boton de clear
+        Button clear = findViewById(R.id.clear);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputs = new LinkedList<>();
+                lista.setText(inputs.toString());
+            }
+        });
+
     }
 
 }
