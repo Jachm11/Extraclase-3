@@ -8,9 +8,9 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         System.out.println("Ola ke ase");
-        sort();
-        int[] arr = new int[10];
-        arr[0] = 2;
+        int[] arr = new int[]{9,5,12,3,10};
+        int[] arr2 = new int[]{6,8,1,4};
+        sort(arr2);
 
     }
 }
