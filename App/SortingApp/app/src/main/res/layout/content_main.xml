@@ -75,13 +75,13 @@
             android:text="Bubble Sort" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Selection Sort" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/insertion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Insertion Sort" />
