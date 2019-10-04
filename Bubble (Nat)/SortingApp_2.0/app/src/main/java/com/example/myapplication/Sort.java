@@ -59,7 +59,7 @@ public class Sort extends AppCompatActivity {
     }
 
     public void bubbleSort() {
-        comparaciones = 0;
+        comparaciones = swaps = 0;
         steps.clear();
         steps.add(arrayToString(array));
 
@@ -74,12 +74,11 @@ public class Sort extends AppCompatActivity {
                     temp = array[j-1];
                     array[j-1] = array[j];
                     array[j] = temp;
+                    steps.add(arrayToString(array));
                 }
                 comparaciones++;
             }
-
-            steps.add(arrayToString(array));
-
+            //steps.add(arrayToString(array));
         }
         System.out.println("Swaps: "+swaps);
         System.out.println("Comparaciones: "+comparaciones);
@@ -87,7 +86,7 @@ public class Sort extends AppCompatActivity {
     }
 
     public void selectionSort(){
-        comparaciones = 0;
+        comparaciones = swaps = 0;
         steps.clear();
         steps.add(arrayToString(array));
 
@@ -110,17 +109,17 @@ public class Sort extends AppCompatActivity {
             if (entrada){
                 swaps++;
                 steps.add(arrayToString(array));
-                printArray(array);
             }
         }
+        printArray(array);
         System.out.println("Swaps: "+swaps);
         System.out.println("Comparaciones: "+comparaciones);
     }
 
     public void insertionSort (){
-        comparaciones = 0;
+        comparaciones = swaps = 0;
         steps.clear();
-        steps.add(arrayToString(array));
+        //steps.add(arrayToString(array));
 
         printArray(array);
         int size = array.length;
@@ -135,19 +134,23 @@ public class Sort extends AppCompatActivity {
                 if (!ajuste){
                     comparaciones--;
                     ajuste = true;
+                    swaps++;
+                    steps.add(arrayToString(array));
                 }
                 comparaciones++;
                 array[j + 1] = array[j];
-                swaps++;
+
+                //swaps++;
                 j = j - 1;
             }
-            if (array[j+1] > current && j != -1){
+            if (array[j+1] > current && j != -1)
                 comparaciones++;
-            }
             array[j + 1] = current;
-            printArray(array);
-            steps.add(arrayToString(array));
+            //printArray(array);
+            //steps.add(arrayToString(array));
         }
+        steps.add(arrayToString(array));
+        printArray(array);
         System.out.println("Swaps: "+swaps);
         System.out.println("Comparaciones: "+comparaciones);
     }
