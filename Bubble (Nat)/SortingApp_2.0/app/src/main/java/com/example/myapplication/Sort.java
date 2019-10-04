@@ -17,8 +17,6 @@ public class Sort extends AppCompatActivity {
     Integer[] array = getArray(MainActivity.inputs);
     int type = MainActivity.sortType;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,6 +34,7 @@ public class Sort extends AppCompatActivity {
         });
         sort();
     }
+
     public void sort(){
         TextView text = findViewById(R.id.typeText);
         TextView swapTxt = findViewById(R.id.swapText);
@@ -62,6 +61,8 @@ public class Sort extends AppCompatActivity {
     public void bubbleSort() {
         comparaciones = 0;
         steps.clear();
+        steps.add(arrayToString(array));
+
         int n = array.length;
         int temp;
 
@@ -80,54 +81,47 @@ public class Sort extends AppCompatActivity {
             steps.add(arrayToString(array));
 
         }
-
-        System.out.println(" ");
         System.out.println("Swaps: "+swaps);
         System.out.println("Comparaciones: "+comparaciones);
         printArray(array);
     }
 
     public void selectionSort(){
+        comparaciones = 0;
+        steps.clear();
+        steps.add(arrayToString(array));
+
         for (int i = 0; i < array.length; i++){
             int index = i;
             boolean entrada = false;
 
             for (int j = i+1; j < array.length; j++) {
-
                 if (array[j] < array[index]) {
                     entrada = true;
-                    //System.out.println(listaNumeros.get(j)+" < "+listaNumeros.get(index));
                     index = j;
-                    //swaps += 1;
-                    //swaps += 1;
-                    //swaps++;
-                    //comparaciones++;
                 }
                 comparaciones++;
             }
 
-            if (entrada)
-                swaps++;
-
-
-            /*int smallerNumber = listaNumeros.get(index);
-            listaNumeros.overwrite(listaNumeros.search(listaNumeros.get(index)), listaNumeros.get(i));
-            listaNumeros.overwrite(listaNumeros.search(listaNumeros.get(i)), smallerNumber);*/
             int smallerNumber = array[index];
             array[index] = array[i];
             array[i] = smallerNumber;
 
-            /*
-            System.out.println("");
-            for (int x = 0; x<listaNumeros.size(); x++){
-                System.out.print(listaNumeros.get(x) + " ");
-            }*/
+            if (entrada){
+                swaps++;
+                steps.add(arrayToString(array));
+                printArray(array);
+            }
         }
+        System.out.println("Swaps: "+swaps);
+        System.out.println("Comparaciones: "+comparaciones);
     }
 
     public void insertionSort (){
-        steps.clear();
         comparaciones = 0;
+        steps.clear();
+        steps.add(arrayToString(array));
+
         printArray(array);
         int size = array.length;
         for (int i = 1; i < size; ++i) {
@@ -154,9 +148,8 @@ public class Sort extends AppCompatActivity {
             printArray(array);
             steps.add(arrayToString(array));
         }
-
-        System.out.println("swaps "+swaps);
-        System.out.println("comps "+comparaciones);
+        System.out.println("Swaps: "+swaps);
+        System.out.println("Comparaciones: "+comparaciones);
     }
 
     public void printArray(Integer[] array){
@@ -183,6 +176,7 @@ public class Sort extends AppCompatActivity {
 
         return str;
     }
+
     public String printbySteps(){
         String arraystr = (String)steps.get(counter);
         arraystr = counter+1+" "+ arraystr;
