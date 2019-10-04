@@ -1,14 +1,11 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.LinkedList;
 
@@ -18,24 +15,13 @@ public class Sort extends AppCompatActivity {
     int counter;
     LinkedList steps= new LinkedList();
     Integer[] array = getArray(MainActivity.inputs);
-    int type = 0;
+    int type = MainActivity.sortType;
 
 
-    public Sort(){
-        TextView text = findViewById(R.id.typeText);
-        if (type == 0){
-            bubbleSort(array);
-            text.setText("Bubble Sort!");}
-        else if (type == 1){
-            text.setText("Selection Sort!");
-        }
-        else {
-            text.setText("Insertion Sort!");
-        }
 
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
 
@@ -44,16 +30,38 @@ public class Sort extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 stepText.setText(printbySteps());
-
-
 
             }
         });
+        sort();
+    }
+    public void sort(){
+        TextView text = findViewById(R.id.typeText);
+        TextView swapTxt = findViewById(R.id.swapText);
+        TextView compTxt = findViewById(R.id.compText);
+        TextView arrayTxt = findViewById(R.id.arrayText);
+        if (type == 1){
+            bubbleSort();
+            text.setText("Bubble Sort!");}
+        else if (type == 2){
+            insertionSort();
+            text.setText("Selection Sort!");
+
+        }
+        else {
+            text.setText("Insertion Sort!");
+        }
+        System.out.println(swaps);
+        System.out.println(comparaciones);
+        swapTxt.setText("Swaps: "+swaps);
+        compTxt.setText("Comparaciones: "+comparaciones);
+        arrayTxt.setText("Lista Ordenada: "+ arrayToString(array));
     }
 
-    public void bubbleSort(Integer[] array) {
+    public void bubbleSort() {
+        comparaciones = 0;
+        steps.clear();
         int n = array.length;
         int temp;
 
@@ -80,6 +88,45 @@ public class Sort extends AppCompatActivity {
 
 
     }
+    public void insertionSort (){
+        steps.clear();
+        comparaciones = 0;
+        printArray(array);
+        int size = array.length;
+        for (int i = 1; i < size; ++i) {
+            int current = array[i];
+            int j = i - 1;
+
+            boolean ajuste = false;
+
+            comparaciones++;
+            while (j >= 0 && array[j] > current) {
+                if (!ajuste){
+                    comparaciones--;
+                    ajuste = true;
+                }
+                comparaciones++;
+                array[j + 1] = array[j];
+                swaps++;
+                j = j - 1;
+            }
+            if (array[j+1] > current && j != -1){
+                comparaciones++;
+            }
+            array[j + 1] = current;
+            printArray(array);
+            steps.add(arrayToString(array));
+        }
+
+        System.out.println("swaps "+swaps);
+        System.out.println("comps "+comparaciones);
+
+
+    }
+
+
+
+
     public void printArray(Integer[] array){
         String arrayStr;
         arrayStr ="Array: [";
@@ -105,21 +152,19 @@ public class Sort extends AppCompatActivity {
         return str;
     }
     public String printbySteps(){
-        if (counter == steps.size()){
+        String arraystr = (String)steps.get(counter);
+        arraystr = counter+1+" "+ arraystr;
+
+        if (counter == steps.size()-1){
             counter=0;
         }
         else{
             counter++;
         }
-        String arraystr = (String)steps.get(counter);
-        arraystr = counter+1+" "+ arraystr;
         return arraystr;
     }
 
     public Integer[] getArray(LinkedList<Integer> linkedlist){
-        //MainActivity getinputs = new MainActivity();
-        //LinkedList<Integer> linkedlist = new LinkedList<>();
-        // linkedlist = getinputs.inputs;
 
         Integer[] arrayInputs = linkedlist.toArray(new Integer[linkedlist.size()]);
         return arrayInputs;
@@ -127,3 +172,4 @@ public class Sort extends AppCompatActivity {
 
 
 }
+

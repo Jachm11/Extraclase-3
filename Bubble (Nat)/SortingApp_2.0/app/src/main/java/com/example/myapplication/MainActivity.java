@@ -1,29 +1,22 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
-    LinkedList<Integer> inputs = new LinkedList<>();
-    int sortType = 0; // 0 null, 1 bubble, 2 selection, 3 insertion
+    static LinkedList<Integer> inputs = new LinkedList<>();
+    static int sortType = 0; // 0 null, 1 bubble, 2 selection, 3 insertion
     int swaps = 0;
     int comparaciones = 0;
 
@@ -105,32 +98,43 @@ public class MainActivity extends AppCompatActivity {
 
                 Integer[] array = inputs.toArray(new Integer[inputs.size()]);
                 System.out.println(array);
+                sortList();
+               /*
+               switch (sortType){
+                   case 1:
 
-                switch (sortType){
-                    case 1:
-                        //Llamada al metodo void de Bubble(array)
+                       sortList();
+                       //Llamada al metodo void de Bubble(array)
 
-                    case 2:
-                        //Llamada al metodo void de Selection(array)
+                   case 2:
+                       sortList();
+                       //Llamada al metodo void de Selection(array)
 
-                    case 3:
-                        //Llamada al metodo void de Insertion(array)
-
+                   case 3:
+                       sortList();
+                       //Llamada al metodo void de Insertion(array)
+               */
                 // Para estos metodos opino q lo mejor esq modifiquen variables en su clase
                 // Para a hacer algo asi: simpre y cuando los metods de arriba esten en una clase.
                 //Sino es lo mismo pero para cada metodo
 
-                /*
-                  comparaciones = claseDelMetodo.getComps();
-                  swaps = claseDelMetodo.getSwaps();
-                 */
-                }
-
-                // Ejecuta el metodo que muestra en la pantalla lo que queremos
-                //Puede ser algo como: mostrar(comparaciones,swaps,array de arrays)
-
+               /*
+                 comparaciones = claseDelMetodo.getComps();
+                 swaps = claseDelMetodo.getSwaps();
+                */
             }
+
+            // Ejecuta el metodo que muestra en la pantalla lo que queremos
+            //Puede ser algo como: mostrar(comparaciones,swaps,array de arrays)
+
+            //}
         });
+
+    }
+    public void sortList(){
+        Intent intent = new Intent(this , Sort.class);
+        startActivity(intent);
+
 
     }
 
