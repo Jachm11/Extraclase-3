@@ -17,9 +17,12 @@ public class Sort extends AppCompatActivity {
     Integer[] array = getArray(MainActivity.inputs);
     int type = MainActivity.sortType;
 
+    /**
+     * Método principal de esta pantalla, invoca el método de ordenamiento.
+     * @param savedInstanceState muestra la pantalla.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
 
@@ -29,12 +32,14 @@ public class Sort extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 stepText.setText(printbySteps());
-
             }
         });
         sort();
     }
 
+    /**
+     * Se obtiene el método de ordenamiento seleccionado.
+     */
     public void sort(){
         TextView text = findViewById(R.id.typeText);
         TextView swapTxt = findViewById(R.id.swapText);
@@ -58,6 +63,9 @@ public class Sort extends AppCompatActivity {
         arrayTxt.setText("Lista Ordenada: "+ arrayToString(array));
     }
 
+    /**
+     * Método de ordenamiento: BubbleSort.
+     */
     public void bubbleSort() {
         comparaciones = swaps = 0;
         steps.clear();
@@ -78,13 +86,14 @@ public class Sort extends AppCompatActivity {
                 }
                 comparaciones++;
             }
-            //steps.add(arrayToString(array));
         }
         System.out.println("Swaps: "+swaps);
         System.out.println("Comparaciones: "+comparaciones);
-        printArray(array);
     }
 
+    /**
+     * Método de ordenamiento: SelectionSort.
+     */
     public void selectionSort(){
         comparaciones = swaps = 0;
         steps.clear();
@@ -111,17 +120,17 @@ public class Sort extends AppCompatActivity {
                 steps.add(arrayToString(array));
             }
         }
-        printArray(array);
         System.out.println("Swaps: "+swaps);
         System.out.println("Comparaciones: "+comparaciones);
     }
 
+    /**
+     * Método de ordenamiento: InsertionSort.
+     */
     public void insertionSort (){
         comparaciones = swaps = 0;
         steps.clear();
-        //steps.add(arrayToString(array));
 
-        printArray(array);
         int size = array.length;
         for (int i = 1; i < size; ++i) {
             int current = array[i];
@@ -139,35 +148,22 @@ public class Sort extends AppCompatActivity {
                 }
                 comparaciones++;
                 array[j + 1] = array[j];
-
-                //swaps++;
                 j = j - 1;
             }
             if (array[j+1] > current && j != -1)
                 comparaciones++;
             array[j + 1] = current;
-            //printArray(array);
-            //steps.add(arrayToString(array));
         }
         steps.add(arrayToString(array));
-        printArray(array);
         System.out.println("Swaps: "+swaps);
         System.out.println("Comparaciones: "+comparaciones);
     }
 
-    public void printArray(Integer[] array){
-        String arrayStr;
-        arrayStr ="Array: [";
-        //System.out.print("Array: [");
-        for (int i =0; i<array.length;i++){
-            arrayStr = arrayStr+array[i]+" ";
-            //System.out.print(array[i]+" ");
-        }
-        arrayStr = arrayStr+"]";
-        //System.out.print("]");
-        System.out.println(arrayStr);
-    }
-
+    /**
+     * Método para convertir un arreglo a String.
+     * @param array Recibe un arreglo con todos los números introducidos por el usuario. (Integer[])
+     * @return retorna una cadena con todos los números del arreglo. (String)
+     */
     public String arrayToString(Integer[] array){
         String str;
         str="[";
@@ -180,6 +176,10 @@ public class Sort extends AppCompatActivity {
         return str;
     }
 
+    /**
+     * Método encargado de mostrar el paso a paso de los swaps del ordenamiento.
+     * @return Retorna una cadena con los caracteres tras cada swap. (String)
+     */
     public String printbySteps(){
         String arraystr = (String)steps.get(counter);
         arraystr = counter+1+" "+ arraystr;
@@ -193,8 +193,12 @@ public class Sort extends AppCompatActivity {
         return arraystr;
     }
 
+    /**
+     * Método para obtener el arreglo de la primera pantalla.
+     * @param linkedlist Recibe la lista con los números a ordenar. (LinkedList)
+     * @return retorna el arreglo con los números introducidos en la primera pantalla. (Integer[])
+     */
     public Integer[] getArray(LinkedList<Integer> linkedlist){
-
         Integer[] arrayInputs = linkedlist.toArray(new Integer[linkedlist.size()]);
         return arrayInputs;
     }

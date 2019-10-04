@@ -17,10 +17,11 @@ public class MainActivity extends AppCompatActivity {
 
     static LinkedList<Integer> inputs = new LinkedList<>();
     static int sortType = 0; // 0 null, 1 bubble, 2 selection, 3 insertion
-    int swaps = 0;
-    int comparaciones = 0;
 
-
+    /**
+     * Método principal del programa. Crea los objetos.
+     * @param savedInstanceState muestra la aplicación.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +29,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         //Text input
         final EditText entrie = findViewById(R.id.entries);
 
         //Text view
         final TextView lista = findViewById(R.id.lista);
-
 
         //Boton de add
         final Button add = findViewById(R.id.add);
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Boton de clear
+        //Clear button
         Button clear = findViewById(R.id.clear);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        //Boton de sort
+        //Sort button
         final Button sort = findViewById(R.id.sort);
         sort.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,43 +97,15 @@ public class MainActivity extends AppCompatActivity {
                 Integer[] array = inputs.toArray(new Integer[inputs.size()]);
                 System.out.println(array);
                 sortList();
-               /*
-               switch (sortType){
-                   case 1:
-
-                       sortList();
-                       //Llamada al metodo void de Bubble(array)
-
-                   case 2:
-                       sortList();
-                       //Llamada al metodo void de Selection(array)
-
-                   case 3:
-                       sortList();
-                       //Llamada al metodo void de Insertion(array)
-               */
-                // Para estos metodos opino q lo mejor esq modifiquen variables en su clase
-                // Para a hacer algo asi: simpre y cuando los metods de arriba esten en una clase.
-                //Sino es lo mismo pero para cada metodo
-
-               /*
-                 comparaciones = claseDelMetodo.getComps();
-                 swaps = claseDelMetodo.getSwaps();
-                */
             }
-
-            // Ejecuta el metodo que muestra en la pantalla lo que queremos
-            //Puede ser algo como: mostrar(comparaciones,swaps,array de arrays)
-
-            //}
         });
-
     }
+
+    /**
+     * Método para invocar la pantalla del sort.
+     */
     public void sortList(){
         Intent intent = new Intent(this , Sort.class);
         startActivity(intent);
-
-
     }
-
 }
